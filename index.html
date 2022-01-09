@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>WebGIS</title>
+    <title>Rawan Banjir</title>
     <link rel="stylesheet" href="library/leaflet/leaflet.css" />
     <link rel="stylesheet" href="css/style.css" />
     <script src="library/leaflet/leaflet.js"></script>
@@ -13,10 +13,10 @@
 <body>
     <div id="map">
         <script>
-            var map = L.map('map').setView([-6.974277, 110.410620], 13);
+            var map = L.map('map').setView([-7.780189, 110.368246], 12);
 
             var baseLayers = {
-                'Esri.WorldTopoMap': L.tileLayer.provider('Esri.WorldTopoMap'),
+                'Esri WorldTopoMap': L.tileLayer.provider('Esri.WorldTopoMap'),
                 'Esri WorldImagery': L.tileLayer.provider('Esri.WorldImagery').addTo(map),
                 'OSM Default': L.tileLayer.provider('OpenStreetMap.DE'),
                 'OSM France': L.tileLayer.provider('OpenStreetMap.France')
@@ -31,27 +31,30 @@
                         fillColor: KlasBanjir[feature.properties.Klas_Rawan],
                         weight: 0.3,
                         opacity: 0,
-                        fillOpacity: 0.5
+                        fillOpacity: 0.7
                     };
                 },
+
+                /*Tampilan HTML Top UP*/
+
                 onEachFeature: function( feature, layer ){
                     layer.bindPopup(
-                        "Klas Rawan Bajir : " + "<left>" + feature.properties.Klas_Rawan + "</left>" + "<br>" +
+                        "Klas Rawan Banjir : " + "<left>" + feature.properties.Klas_Rawan + "</left>" + "<br>" +
                         "Luas :" + "<left>" + feature.properties.Shape_Area + "</left>" + " m2"
                         )
                 }
             });
-            $.getJSON("data/Rawan_Banjir_Semarang_Geo.json", function(data) {
+            $.getJSON("data/rawanbajirorder_json.json", function(data) {
                 AreaRawanBanjir.addData(data);
             });
 
 			/* Merubah Tampilan Warna Berdasar Atribut Klas Banjir */
 			var KlasBanjir = {
-				"Aman":"#d3f0f2",
-				"Cukup Aman":"#9bd1e8",
+				"Aman":"#73ff4d",
+				"Cukup Aman":"#fffc4d",
 				"Agak Rawan":"#6c76cc",
-				"Rawan":"#1326d1",
-				"Sangat Rawan":"#0b0a5c"
+				"Rawan":"#f29b9b",
+				"Sangat Rawan":"#f72d2d"
 			};
 
             var mapLayers = {
